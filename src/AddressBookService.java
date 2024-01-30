@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class AddressBookService {
     public String display(Person p){
-        System.out.println("\n You entered these values");
+        //System.out.println(" You entered these values");
         return p.getFirstname()+" "+ p.getLastname()+" "+p.getEmail()+" "+p.getCity()+" "+p.getState()+" "+p.getZip()+" "+p.getPhno()+"\n";
     }
     public void setValues(Person p){
