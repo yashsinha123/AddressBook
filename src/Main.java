@@ -1,23 +1,114 @@
-import java.util.Iterator;
-import java.util.Map;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("welcome to address book system");
 
-        //Person p1 = new Person();
-        AddressBook a1 = new AddressBook();
-        AddressBookService s1 = new AddressBookService();
+        HashMap<String, AddressBook> addressbookss = new HashMap<>();
         Scanner sc = new Scanner(System.in);
-        while (true) {
+        AddressBookService s1 = new AddressBookService();
+
+        System.out.println("welcome to address book system");
+        //int action1 = sc.nextInt();
+        while(true){
+            System.out.println("Choose an action on adddressbooks:");
+            System.out.println("1. Add addressbook");
+            System.out.println("2. display addressbook");
+
+            String action1 = sc.next();
+            sc.nextLine();
+            switch(action1){
+                case "1":
+                    System.out.println("write the name of the addressbook: ");
+
+                    String thisBook = sc.next();
+
+                    addressbookss.put(thisBook, new AddressBook());
+                    while(true) {
+
+                        System.out.println("Choose an action:");
+                        System.out.println("1. Add person");
+                        System.out.println("2. Edit person");
+                        System.out.println("3. Delete person");
+                        System.out.println("4. Display address book");
+                        System.out.println("5.getting out of the address book");
+                        int action = sc.nextInt();
+
+                        sc.nextLine();
+
+                        //action = sc.nextInt();
+                        //sc.nextLine();
+                        switch (action) {
+                            case 1:
+                                addressbookss.get(thisBook).addperson(s1);
+
+                                break;
+                            case 2:
+
+                                //Scanner sc = new Scanner(System.in);
+                                addressbookss.get(thisBook).editpersonusingfirstname(s1, sc);
+                                break;
+
+                            case 3:
+                                //Scanner sc = new Scanner(System.in);
+                                addressbookss.get(thisBook).delete(sc);
+                                break;
+                            case 4:
+                                System.out.println("Address Book:");
+                                for (Person person : addressbookss.get(thisBook).contactList.values()) {
+                                    System.out.println(s1.display(person));
+                                }
+                                break;
+                            case 5:
+                                break;
+
+                        }
+                        if(action == 5){
+
+                            break;
+                        }
+
+
+                    }
+                    break;
+                case "2":
+                    System.out.println("number of address books and its data is:");
+                    System.out.println("Printing elements using a for loop:");
+                    for (String key : addressbookss.keySet()) {
+                        System.out.println("name of the book is:" + key);
+                        System.out.println(addressbookss.get(key));
+                    }
+
+
+                    break;
+                case "3":
+                    break;
+
+            }
+
+            //m1.multiplebook(addressbookss);
+
+            //Person p1 = new Person();
+            // AddressBook a1 = new AddressBook();
+
+            //addressbookss.add(a1);
+            //AddressBookService s1 = new AddressBookService();
+
+            //a1.multiplebooks(addressbookss);
+            /*
+
+
+        int action = 0;
+        while (action!=5) {
             System.out.println("Choose an action:");
             System.out.println("1. Add person");
             System.out.println("2. Edit person");
             System.out.println("3. Delete person");
             System.out.println("4. Display address book");
-            System.out.println("5. Exit");
-            int action = sc.nextInt();
+            System.out.println("5.getting out of the address book");
+
+
+            action = sc.nextInt();
             sc.nextLine();
             switch (action) {
                 case 1:
@@ -25,58 +116,22 @@ public class Main {
 
                     break;
                 case 2:
-                    //Scanner sc = new Scanner(System.in);
-                    System.out.println("to edit type 'edit':");
-                    String userinput = sc.next();
-                    if ("edit".equalsIgnoreCase(userinput)) {
-                        System.out.println("please enter the first name of the user to edit");
-                        String fristnametoedit = sc.next();
-                        Iterator<Map.Entry<Integer, Person>> iterator = a1.contactList.entrySet().iterator();
-                        boolean found = false;
-                        while (iterator.hasNext()) {
-                            Map.Entry<Integer, Person> entery = iterator.next();
-                            Person currentperson = entery.getValue();
-                            if (currentperson.getFirstname().equalsIgnoreCase(fristnametoedit)) {
-                                s1.setValues(currentperson);
-                                System.out.println("updated details:");
-                                System.out.println(s1.display(currentperson));
-                                found = true;
-                                break;
-                            }
-                        }
-                        if (!found) {
-                            System.out.println("person not found");
-                        }
 
-                    }
+                    //Scanner sc = new Scanner(System.in);
+                    a1.editpersonusingfirstname(s1,sc);
                     break;
+
                 case 3:
                     //Scanner sc = new Scanner(System.in);
-                    System.out.println("to delete type 'delete'");
-                    String userinput1 = sc.next();
-                    if ("delete".equalsIgnoreCase(userinput1)) {
-                        System.out.println("please enter thr first name of the user u want to delete");
-                        String fristnametodelete = sc.next();
-                        Iterator<Map.Entry<Integer, Person>> iterator = a1.contactList.entrySet().iterator();
-                        while (iterator.hasNext()) {
-                            Map.Entry<Integer, Person> entry = iterator.next();
-                            Person currentperson = entry.getValue();
-                            if (currentperson.getFirstname().equalsIgnoreCase(fristnametodelete)) {
-                                iterator.remove();
-                                System.out.println("entry of the person is deleted");
-                                break;
-                            }
-                        }
-
-                    } else {
-                        System.out.println("inavlid, please type 'edit or 'delete'");
-                    }
+                    a1.delete(sc);
                     break;
                 case 4:
                     System.out.println("Address Book:");
                     for (Person person : a1.contactList.values()) {
                         System.out.println(s1.display(person));
                     }
+                    break;
+                case 5:
                     break;
 
             }
