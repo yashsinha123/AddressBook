@@ -5,7 +5,7 @@ public class Person {
     private String city;
     private String state;
     private Integer zip;
-    private Integer phno;
+    private String phno;
     private String email;
 
     public String getFirstname() {
@@ -56,11 +56,12 @@ public class Person {
         this.zip = zip;
     }
 
-    public Integer getPhno() {
+    public String getPhno() {
+
         return phno;
     }
 
-    public void setPhno(Integer phno) {
+    public void setPhno(String phno) {
         this.phno = phno;
     }
 
@@ -75,14 +76,15 @@ public class Person {
     @Override
     public String toString() {
         return "Person{" +
-                "firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", zip=" + zip +
-                ", phno=" + phno +
-                ", email='" + email + '\'' +
+                "firstname='" + firstname + "\n" +
+                ", lastname='" + lastname + "\n" +
+                ", address='" + address + "\n" +
+                ", city='" + city + "\n" +
+                ", state='" + state + "\n" +
+                ", zip=" + zip + "\n" +
+                ", phno=" + phno + "\n" +
+                ", email='" + email + "\n" +
                 '}';
     }
+
 }

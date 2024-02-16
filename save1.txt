@@ -1,0 +1,38 @@
+yash: AddressBook:
+contactList={1=Person{firstname='yash
+, lastname='sinhas
+, address='null
+, city='aSDSFDG
+, state='SADF
+, zip=1234
+, phno=6266865756
+, email='SASDFG
+}, 2=Person{firstname='DSF
+, lastname='QWER
+, address='null
+, city='WER
+, state='WERG
+, zip=1234
+, phno=6266865758
+, email='DEDFG
+}}
+.
+qwerty: AddressBook:
+contactList={1=Person{firstname='dfg
+, lastname='sdf
+, address='null
+, city='sdfg
+, state='sdfg
+, zip=98989
+, phno=8989700869
+, email='sdf
+}, 2=Person{firstname='mk
+, lastname='sdf
+, address='null
+, city='sdf
+, state='wef
+, zip=1234
+, phno=9406586362
+, email='werf
+}}
+.

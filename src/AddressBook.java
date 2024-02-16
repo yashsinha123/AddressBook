@@ -1,17 +1,28 @@
-import java.util.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
 
 public class AddressBook {
     HashMap<Integer,Person> contactList = new HashMap<>();
 
-
-
-
     public void addperson(AddressBookService addressBookService){
         Person newperson = new Person();
-        addressBookService.setValues(newperson);
-        int countid = contactList.size() + 1;
-        contactList.put(countid, newperson);
-        System.out.println("contact added with contactid: " + countid);
+        try{
+            addressBookService.setValues(newperson,this);
+            int countid = contactList.size() + 1;
+            contactList.put(countid, newperson);
+            System.out.println("contact added with contactid: " + countid);
+
+        }
+        catch (RuntimeException e){
+            e.getMessage();
+            e.printStackTrace();
+        }
+
     }
     public void editpersonusingfirstname(AddressBookService addressBookService, Scanner sc){
         System.out.println("to edit type 'edit':");
@@ -25,7 +36,7 @@ public class AddressBook {
                 Map.Entry<Integer, Person> entery = iterator.next();
                 Person currentperson = entery.getValue();
                 if (currentperson.getFirstname().equalsIgnoreCase(fristnametoedit)) {
-                    addressBookService.setValues(currentperson);
+                    addressBookService.setValues(currentperson,this);
                     System.out.println("updated details:");
                     System.out.println(addressBookService.display(currentperson));
                     found = true;
@@ -62,11 +73,23 @@ public class AddressBook {
         }
 
     }
+    public  void writeHashMapToFile(HashMap<String, AddressBook> inputMap, String fileName) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            for (Map.Entry<String, AddressBook> entry : inputMap.entrySet()) {
+                writer.write(entry.getKey() + ": " + entry.getValue());
+                writer.newLine(); // Add a new line for each entry
+            }
+            System.out.println("HashMap has been written to " + fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public String toString() {
-        return "AddressBook{" +
-                "contactList=" + contactList +
-                '}';
+        return "AddressBook:" + "\n" +
+                "contactList=" + contactList + "\n"+
+                '.';
     }
 }
