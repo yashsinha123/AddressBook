@@ -1,5 +1,7 @@
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -89,6 +91,9 @@ public class Main {
 
                     a1.writeHashMapToFile(addressbookss,"save1.txt");
                 case "4":
+                    System.out.println("please enter the name of the city you want to find people of");
+                    String cityname = sc.nextLine();
+                    checkCity(cityname,addressbookss,a1);
 
             }
 
@@ -96,5 +101,14 @@ public class Main {
     }
 
 
+    private static void checkCity(String cityName, HashMap<String, AddressBook> addressBooks, AddressBook currentAddressBook) {
+        List matchingContacts = addressBooks.values().stream()
+                .flatMap(AddressBook -> AddressBook.contactList.values().stream())
+                .filter((s)-> s.getCity().equalsIgnoreCase(cityName))
+
+                .collect(Collectors.toList());
+
+        System.out.println(matchingContacts);
+    }
 
 }

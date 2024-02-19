@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,9 +13,7 @@ public class AddressBookService {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter your first name: ");
         String fn = sc.next();
-        if (!checkname(fn, address)){
-            throw new RuntimeException("CHALA JA YAHA SE NAYA NAM LEKE AA, APNA KHUDKA NAM BANA "+ fn);
-        }
+        checkname(fn, address);
 
         p.setFirstname(fn);
 
@@ -51,8 +50,12 @@ public class AddressBookService {
 
     }
 
-    private boolean checkname(String name, AddressBook address) {
-        return address.contactList.values().stream().map((s) -> s.getFirstname() != name).count() == 0;
+    private void checkname(String name, AddressBook address) {
+        List<String> listOfAllNames = address.contactList.values().stream().map((s) -> s.getFirstname().toLowerCase()).toList();
+
+        if (listOfAllNames.contains(name.toLowerCase())){
+             throw new RuntimeException("CHALA JA YAHA SE NAYA NAM LEKE AA, APNA KHUDKA NAM BANA " + name);
+         }
 
     }
 
